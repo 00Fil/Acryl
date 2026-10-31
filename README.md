@@ -28,7 +28,7 @@ Aggiungi un oggetto a `aiSolutions` in `src/content/site.ts`: pagina, menu, foot
 
 ## Deploy
 
-`Dockerfile` pronto (output standalone, utente non root). Su Dokploy: build da Dockerfile, porta 3000, variabili da `.env.example`; `NEXT_PUBLIC_SITE_URL` anche come build arg.
+`Dockerfile` pronto (output standalone, utente non root). Su Dokploy: build da Dockerfile, porta 3000, variabili da `.env.example`; `NEXT_PUBLIC_SITE_URL=https://denuvo.studio` anche come build arg.
 
 ## Da completare prima del lancio
 
