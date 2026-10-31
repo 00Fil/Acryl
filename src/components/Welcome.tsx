@@ -1,16 +1,56 @@
 "use client";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { colorOf, initialsOf, type Solution } from "@/lib/azienda";
 
 type Phase = "ask" | "scan" | "result" | "closed";
-type Result = { name: string; source: "google" | "esempio"; label: string; items: Solution[] };
+type Result = { name: string; source: "openstreetmap" | "nessuna"; website: string | null; label: string; items: Solution[] };
 
 const KEY = "acryl-benvenuto";
-const STEPS = ["Cerco la scheda su Google Maps", "Leggo categoria e attività", "Preparo il logo", "Scelgo le soluzioni per voi"];
+const STEPS = ["Cerco l'attività su OpenStreetMap", "Leggo categoria e attività", "Preparo il logo", "Scelgo le soluzioni per voi"];
 
-/** Ingresso: chiede il nome dell'azienda e mostra solo le soluzioni per lei. Si apre una volta per sessione. */
-export function Welcome() {
+/** Logo dal sito dell'azienda (favicon pubblica); senza sito o in errore, iniziali su colore pieno. */
+function Logo({ name, website }: { name: string; website: string | null }) {
+  const [failed, setFailed] = useState(false);
+  const host = website ? safeHost(website) : null;
+  if (host && !failed) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={`https://www.google.com/s2/favicons?domain=${host}&sz=128`}
+        alt=""
+        width={80}
+        height={80}
+        onError={() => setFailed(true)}
+        className="h-20 w-20 flex-none rounded-[22px] bg-white object-contain p-3"
+      />
+    );
+  }
+  return (
+    <div aria-hidden="true" className="grid h-20 w-20 flex-none place-items-center rounded-[22px] text-3xl font-bold" style={{ background: colorOf(name) }}>
+      {initialsOf(name)}
+    </div>
+  );
+}
+
+function safeHost(url: string) {
+  try {
+    return new URL(url.startsWith("http") ? url : `https://${url}`).hostname;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Ingresso personalizzato. "overlay": si apre prima del sito, una volta per sessione (non su /azienda).
+ * "page": pagina /azienda, parte subito con il campo attivo.
+ */
+export function Welcome({ variant = "overlay" }: { variant?: "overlay" | "page" }) {
+  const pathname = usePathname();
+  const hidden = variant === "overlay" && pathname === "/azienda";
+  const isPage = variant === "page";
+
   const [phase, setPhase] = useState<Phase>("ask");
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -18,25 +58,30 @@ export function Welcome() {
   const [step, setStep] = useState(0);
   const root = useRef<HTMLDivElement>(null);
   const bar = useRef<HTMLDivElement>(null);
+  const input = useRef<HTMLInputElement>(null);
   const reduce = useRef(false);
 
   useEffect(() => {
     reduce.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isPage) {
+      input.current?.focus();
+      return;
+    }
     try {
       if (sessionStorage.getItem(KEY) === "1") setPhase("closed");
     } catch {
-      // Browser senza sessionStorage: l'ingresso resta visibile.
+      // Senza sessionStorage l'ingresso resta visibile.
     }
-  }, []);
+  }, [isPage]);
 
-  // Blocca lo scroll della pagina finché l'ingresso è aperto.
+  // Blocca lo scroll finché l'overlay è aperto.
   useEffect(() => {
-    if (phase === "closed") return;
+    if (phase === "closed" || hidden || isPage) return;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [phase]);
+  }, [phase, hidden, isPage]);
 
   // Entrata morbida ad ogni cambio di schermata.
   useLayoutEffect(() => {
@@ -89,6 +134,10 @@ export function Welcome() {
     } catch {
       // Senza memoria di sessione l'ingresso tornerà alla prossima visita.
     }
+    if (isPage) {
+      window.location.href = "/";
+      return;
+    }
     if (reduce.current || !root.current) {
       setPhase("closed");
       return;
@@ -96,29 +145,36 @@ export function Welcome() {
     gsap.to(root.current, { opacity: 0, duration: 0.45, ease: "power2.in", onComplete: () => setPhase("closed") });
   }
 
-  if (phase === "closed") return null;
+  if (phase === "closed" || hidden) return null;
+
+  const shell = isPage
+    ? "relative min-h-[calc(100svh-72px)] bg-ink text-white"
+    : "fixed inset-0 z-[70] overflow-y-auto bg-ink text-white";
 
   return (
-    <div ref={root} role="dialog" aria-modal="true" aria-labelledby="welcome-title" className="fixed inset-0 z-[70] overflow-y-auto bg-ink text-white">
+    <div ref={root} role={isPage ? undefined : "dialog"} aria-modal={isPage ? undefined : true} aria-labelledby="welcome-title" className={shell}>
       <div className="wrap flex min-h-full flex-col py-8 md:py-10">
-        <div className="flex items-center justify-between" data-in>
-          <span className="inline-flex items-center gap-2.5 text-lg font-semibold tracking-tight">
-            <span aria-hidden="true" className="h-[22px] w-[22px] rounded-[7px] bg-blue" />
-            Acryl
-          </span>
-          <button type="button" onClick={enter} className="rounded-full px-4 py-2 text-[15px] font-medium text-white/70 transition-colors hover:text-white">
-            Salta
-          </button>
-        </div>
+        {!isPage && (
+          <div className="flex items-center justify-between" data-in>
+            <span className="inline-flex items-center gap-2.5 text-lg font-semibold tracking-tight">
+              <span aria-hidden="true" className="h-[22px] w-[22px] rounded-[7px] bg-blue" />
+              Acryl
+            </span>
+            <button type="button" onClick={enter} className="rounded-full px-4 py-2 text-[15px] font-medium text-white/70 transition-colors hover:text-white">
+              Salta
+            </button>
+          </div>
+        )}
 
-        <div className="flex flex-1 items-center py-16">
+        <div className={`flex flex-1 items-center ${isPage ? "py-16 md:py-24" : "py-16"}`}>
           {phase === "ask" && (
             <form onSubmit={submit} className="w-full" data-in>
               <p className="eyebrow text-sky">Benvenuti</p>
-              <h2 id="welcome-title" className="heading mt-5 max-w-[16ch]" data-in>Come si chiama la vostra azienda?</h2>
+              <h1 id="welcome-title" className="heading mt-5 max-w-[16ch]" data-in>Come si chiama la vostra azienda?</h1>
               <div className="mt-10 flex max-w-2xl flex-col gap-3 sm:flex-row" data-in>
                 <label htmlFor="azienda" className="sr-only">Nome dell'azienda</label>
                 <input
+                  ref={input}
                   id="azienda"
                   type="text"
                   value={name}
@@ -134,7 +190,7 @@ export function Welcome() {
               </div>
               {error && <p role="alert" className="mt-4 text-[15px] text-sky">{error}</p>}
               <p className="mt-10 max-w-lg text-[15px] leading-relaxed text-white/60" data-in>
-                Cerchiamo la vostra scheda su Google Maps e vi mostriamo solo le soluzioni che servono a voi.
+                Cerchiamo l'attività su OpenStreetMap e vi mostriamo solo le soluzioni che servono a voi.
               </p>
             </form>
           )}
@@ -160,13 +216,11 @@ export function Welcome() {
           {phase === "result" && result && (
             <div className="w-full">
               <div className="flex items-center gap-5" data-in>
-                <div aria-hidden="true" className="grid h-20 w-20 flex-none place-items-center rounded-[22px] text-3xl font-bold" style={{ background: colorOf(result.name) }}>
-                  {initialsOf(result.name)}
-                </div>
+                <Logo name={result.name} website={result.website} />
                 <div>
                   <p className="text-xl font-semibold">{result.name}</p>
                   <p className="mt-1 text-[15px] text-white/60">
-                    {result.source === "google" ? "Scheda trovata su Google Maps" : "Dati di esempio, scheda non verificata"} · {result.label}
+                    {result.source === "openstreetmap" ? "Scheda trovata su OpenStreetMap" : "Scheda non trovata: soluzioni più comuni"} · {result.label}
                   </p>
                 </div>
               </div>
@@ -187,7 +241,7 @@ export function Welcome() {
 
               <div className="mt-12 flex flex-wrap items-center gap-7" data-in>
                 <button type="button" onClick={enter} className="h-14 rounded-full bg-white px-8 text-[16px] font-semibold text-ink transition-transform hover:-translate-y-0.5">
-                  Entra nel sito
+                  {isPage ? "Vai al sito" : "Entra nel sito"}
                 </button>
                 <button
                   type="button"

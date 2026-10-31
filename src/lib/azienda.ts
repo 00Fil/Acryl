@@ -38,12 +38,13 @@ export const sectorSolutions: Record<SectorKey, { label: string; items: Solution
   },
 };
 
-/** Settore dalla categoria della scheda Google (primaryType) o, in mancanza, dal nome. */
-export function sectorOf(name: string, primaryType?: string): SectorKey {
-  const t = (primaryType ?? "").toLowerCase();
-  if (/restaurant|cafe|bar|pizza|hotel|bakery|meal|lodging/.test(t)) return "hospitality";
-  if (/lawyer|accounting|notary|architect|consult|insurance/.test(t)) return "professional";
-  if (/store|shop|clothing|boutique|market|hardware/.test(t)) return "retail";
+/** Settore dai tag OpenStreetMap (class/type) o, in mancanza, dal nome. */
+export function sectorOf(name: string, osm?: { cls?: string; type?: string }): SectorKey {
+  const c = osm?.cls ?? "";
+  const t = osm?.type ?? "";
+  if ((c === "amenity" && /restaurant|cafe|bar|pub|fast_food|biergarten|ice_cream/.test(t)) || (c === "tourism" && /hotel|guest_house|hostel|motel|apartment/.test(t))) return "hospitality";
+  if (c === "office" && /lawyer|accountant|notary|architect|financial|insurance|consult/.test(t)) return "professional";
+  if (c === "shop") return "retail";
   const n = name.toLowerCase();
   if (/(trattoria|ristor|bar|pizz|caff|osteria|hotel|b&b)/.test(n)) return "hospitality";
   if (/(studio|avvocat|commercialist|consul|notai|architett)/.test(n)) return "professional";

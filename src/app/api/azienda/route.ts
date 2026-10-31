@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { sectorOf, sectorSolutions } from "@/lib/azienda";
+import { site } from "@/content/site";
 
 export const runtime = "nodejs";
 
 const schema = z.object({ name: z.string().trim().min(2).max(60) });
 
-// Limite semplice per IP: 20 richieste ogni 10 minuti.
+// Limite per IP: 20 richieste ogni 10 minuti.
 const hits = new Map<string, number[]>();
 function limited(ip: string) {
   const now = Date.now();
@@ -17,7 +18,45 @@ function limited(ip: string) {
   return blocked;
 }
 
-type PlacesResponse = { places?: { displayName?: { text?: string }; primaryType?: string; websiteUri?: string }[] };
+// Cache di un'ora: OpenStreetMap chiede di non ripetere le stesse richieste.
+type Found = { name: string; website: string | null; cls?: string; type?: string } | null;
+const cache = new Map<string, { at: number; found: Found }>();
+
+type NominatimHit = { name?: string; display_name?: string; class?: string; type?: string; extratags?: { website?: string; "contact:website"?: string } };
+
+/** Cerca l'azienda su OpenStreetMap (Nominatim): dati pubblici, nessuna chiave API. */
+async function lookup(name: string): Promise<Found> {
+  const key = name.toLowerCase();
+  const hit = cache.get(key);
+  if (hit && Date.now() - hit.at < 60 * 60_000) return hit.found;
+
+  const url = new URL("https://nominatim.openstreetmap.org/search");
+  url.search = new URLSearchParams({ q: name, format: "jsonv2", limit: "1", extratags: "1", "accept-language": "it" }).toString();
+  let found: Found = null;
+  try {
+    const res = await fetch(url, {
+      headers: { "User-Agent": `Acryl/1.0 (${site.url})`, "Accept-Language": "it" },
+      cache: "no-store",
+      signal: AbortSignal.timeout(6000),
+    });
+    if (res.ok) {
+      const data = (await res.json()) as NominatimHit[];
+      const h = data[0];
+      if (h) {
+        found = {
+          name: h.name || h.display_name?.split(",")[0] || name,
+          website: h.extratags?.website ?? h.extratags?.["contact:website"] ?? null,
+          cls: h.class,
+          type: h.type,
+        };
+      }
+    }
+  } catch {
+    // Servizio non raggiungibile: si mostrano le soluzioni generiche.
+  }
+  cache.set(key, { at: Date.now(), found });
+  return found;
+}
 
 export async function POST(req: Request) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "anon";
@@ -32,44 +71,13 @@ export async function POST(req: Request) {
   const parsed = schema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: "Inserite il nome dell'azienda." }, { status: 400 });
 
-  let name = parsed.data.name;
-  let primaryType: string | undefined;
-  let website: string | null = null;
-  let source: "google" | "esempio" = "esempio";
-
-  const key = process.env.GOOGLE_PLACES_API_KEY;
-  if (key) {
-    try {
-      const res = await fetch("https://places.googleapis.com/v1/places:searchText", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Goog-Api-Key": key,
-          "X-Goog-FieldMask": "places.displayName,places.primaryType,places.websiteUri",
-        },
-        body: JSON.stringify({ textQuery: name, languageCode: "it", maxResultCount: 1 }),
-        cache: "no-store",
-      });
-      if (res.ok) {
-        const data = (await res.json()) as PlacesResponse;
-        const p = data.places?.[0];
-        if (p) {
-          name = p.displayName?.text ?? name;
-          primaryType = p.primaryType;
-          website = p.websiteUri ?? null;
-          source = "google";
-        }
-      }
-    } catch {
-      // Se Google non risponde, si usa il nome inserito e si segnala la fonte.
-    }
-  }
-
-  const sector = sectorOf(name, primaryType);
+  const found = await lookup(parsed.data.name);
+  const name = found?.name ?? parsed.data.name;
+  const sector = sectorOf(name, found ? { cls: found.cls, type: found.type } : undefined);
   return NextResponse.json({
     name,
-    website,
-    source,
+    website: found?.website ?? null,
+    source: found ? "openstreetmap" : "nessuna",
     sector,
     label: sectorSolutions[sector].label,
     items: sectorSolutions[sector].items,
