@@ -18,7 +18,7 @@ export function AiTabs() {
           </button>
         ))}
       </div>
-      <div className="mt-8 overflow-hidden rounded-[2.5rem] border border-line bg-tint p-6 md:p-12">
+      <div className="mt-8 overflow-hidden rounded-[var(--radius-panel)] border border-line bg-tint p-6 md:p-12">
         <AnimatePresence mode="wait">
           <motion.div key={s.slug} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} className="grid items-center gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
             <div>

@@ -6,7 +6,7 @@ import { cn } from "@/lib/cn";
 
 export function Window({ title, children, className }: { title: string; children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("overflow-hidden rounded-[2rem] border border-line bg-tint shadow-[0_40px_90px_-40px_rgba(42,82,255,.4)] md:rounded-[2.5rem]", className)}>
+    <div className={cn("overflow-hidden rounded-[var(--radius-card)] border border-line bg-tint shadow-[0_40px_90px_-40px_rgba(42,82,255,.4)] md:rounded-[var(--radius-panel)]", className)}>
       <div className="flex items-center gap-2 border-b border-line bg-white/80 px-6 py-4 text-sm text-mute">
         <i className="h-2.5 w-2.5 rounded-full bg-blue/80" />
         <i className="h-2.5 w-2.5 rounded-full bg-blue/45" />

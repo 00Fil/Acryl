@@ -48,7 +48,7 @@ export function QuoteForm() {
 
   if (state === "done")
     return (
-      <div className="rounded-[2.5rem] border border-line bg-tint p-10 md:p-16" role="status">
+      <div className="rounded-[var(--radius-panel)] border border-line bg-tint p-10 md:p-16" role="status">
         <Check size={64} />
         <h2 className="h-section mt-8">Richiesta inviata.</h2>
         <p className="mt-5 max-w-lg text-lg text-mute">Ti rispondiamo entro [N] ore lavorative con le prossime domande e una data per il primo confronto.</p>
@@ -58,7 +58,7 @@ export function QuoteForm() {
   const labels = ["Cosa ti serve", "Il contesto", "I tuoi dati"];
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)]">
-      <form onSubmit={submit} className="rounded-[2.5rem] border border-line bg-tint p-6 md:p-12">
+      <form onSubmit={submit} className="rounded-[var(--radius-panel)] border border-line bg-tint p-6 md:p-12">
         <ol className="mb-10 flex gap-2" aria-label="Avanzamento">
           {labels.map((l, i) => (
             <li key={l} className="flex-1">
@@ -121,7 +121,7 @@ export function QuoteForm() {
         </div>
       </form>
 
-      <aside className="h-fit rounded-[2.5rem] bg-blue p-8 text-white lg:sticky lg:top-28">
+      <aside className="h-fit rounded-[var(--radius-panel)] bg-blue p-8 text-white lg:sticky lg:top-28">
         <p className="text-sm opacity-85">Riepilogo</p>
         <p className="mt-2 text-4xl font-semibold tracking-tight">{level}</p>
         <p className="mt-1 text-sm opacity-85">Complessità indicativa</p>

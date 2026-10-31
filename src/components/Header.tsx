@@ -115,9 +115,9 @@ export function Header() {
                   </motion.div>
                 </div>
                 <div className="col-span-3">
-                  <Link href="/preventivo" className="group relative flex h-full min-h-[300px] flex-col justify-between overflow-hidden rounded-[2rem] bg-blue p-7 text-white">
+                  <Link href="/preventivo" className="group relative flex h-full min-h-[300px] flex-col justify-between overflow-hidden rounded-[var(--radius-card)] bg-blue p-7 text-white">
                     <span aria-hidden="true" className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-white/15 transition-transform duration-700 ease-expo group-hover:scale-125" />
-                    <span aria-hidden="true" className="absolute top-1/2 -right-10 h-40 w-40 rounded-[2.5rem] bg-ink/25 mix-blend-multiply transition-transform duration-700 ease-expo group-hover:-translate-y-3" />
+                    <span aria-hidden="true" className="absolute top-1/2 -right-10 h-40 w-40 rounded-[var(--radius-panel)] bg-ink/25 mix-blend-multiply transition-transform duration-700 ease-expo group-hover:-translate-y-3" />
                     <span className="relative text-sm opacity-90">Strumento</span>
                     <span className="relative">
                       <span className="block text-3xl font-semibold leading-[1.05] tracking-tight">Calcola il tuo preventivo</span>

@@ -17,7 +17,7 @@ export function SectorTabs() {
           </button>
         ))}
       </div>
-      <div className="relative min-h-[360px] overflow-hidden rounded-[2.5rem] border border-line bg-tint p-8 md:p-12">
+      <div className="relative min-h-[360px] overflow-hidden rounded-[var(--radius-panel)] border border-line bg-tint p-8 md:p-12">
         <p className="text-sm font-medium text-mute">Esempi di cosa si può automatizzare</p>
         <AnimatePresence mode="wait">
           <motion.div key={i} initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}>

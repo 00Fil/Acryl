@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Cta } from "@/components/Cta";
 import { CheckList } from "@/components/CheckList";
-import { Layers } from "@/components/Layers";
-import { Pill, Section } from "@/components/Section";
-import { Reveal, Words } from "@/components/Reveal";
+import { PageHero } from "@/components/PageHero";
+import { Reveal } from "@/components/Reveal";
+import { Section } from "@/components/Section";
+import { SectionHead } from "@/components/SectionHead";
 import { categories } from "@/content/site";
 
 export const metadata: Metadata = { title: "Soluzioni", description: "Siti, prodotti digitali, AI, marketing e supporto: tutto quello che costruiamo e come lo facciamo." };
@@ -12,47 +13,37 @@ export const metadata: Metadata = { title: "Soluzioni", description: "Siti, prod
 export default function Soluzioni() {
   return (
     <>
-      <section className="relative">
-        <Layers className="!bottom-auto h-[520px]" />
-        <div className="wrap relative pt-20 md:pt-32">
-          <Reveal y={16}><Pill>Tutto in un posto</Pill></Reveal>
-          <Words text="Soluzioni per ogni fase." className="h-display mt-7 max-w-4xl" delay={0.1} />
-          <Reveal delay={0.4}><p className="mt-8 max-w-xl text-xl leading-relaxed text-mute">Per ognuna: cosa conta davvero, cosa costruiamo e cosa ci serve da voi.</p></Reveal>
-          <Reveal delay={0.5} className="mt-10 flex flex-wrap gap-2">
-            {categories.map((c) => (
-              <Link key={c.id} href={`#${c.id}`} className="rounded-full bg-tint px-5 py-3 text-base font-medium transition-colors hover:bg-blue hover:text-white">{c.title}</Link>
-            ))}
-          </Reveal>
-        </div>
-      </section>
+      <PageHero eyebrow="Soluzioni" title="Soluzioni per ogni fase." lead="Per ognuna: cosa conta davvero, cosa costruiamo e cosa ci serve da voi.">
+        <nav aria-label="Categorie" className="flex flex-wrap gap-2">
+          {categories.map((c) => (
+            <Link key={c.id} href={`#${c.id}`} className="rounded-full border border-line bg-white px-5 py-2.5 text-[15px] font-medium transition-colors hover:border-blue hover:text-blue">{c.title}</Link>
+          ))}
+        </nav>
+      </PageHero>
 
       {categories.map((c, n) => (
-        <Section key={c.id} id={c.id}>
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+        <Section key={c.id} id={c.id} className="border-t border-line">
+          <div className="grid gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
             <div className="lg:sticky lg:top-28 lg:self-start">
-              <p className="text-sm font-semibold text-blue">0{n + 1}</p>
-              <Words as="h2" text={c.title} className="h-section mt-3" />
-              <Reveal delay={0.1}><p className="mt-6 text-lg leading-relaxed text-mute">{c.intro}</p></Reveal>
-              <Reveal delay={0.15} className="mt-8">
-                <p className="mb-3 text-sm font-semibold text-mute">Cosa conta davvero</p>
+              <SectionHead index={`0${n + 1}`} eyebrow={c.title} title={c.title} lead={c.intro} />
+              <Reveal delay={0.2} className="mt-12">
+                <p className="mb-4 text-sm font-semibold text-mute">Cosa conta davvero</p>
                 <CheckList items={c.matters} />
               </Reveal>
-              <Reveal delay={0.2}><p className="mt-6 rounded-2xl bg-tint px-5 py-4 text-[15px] text-blue"><span className="font-semibold">Cosa ci serve da voi:</span> {c.ask}</p></Reveal>
+              <Reveal delay={0.25}>
+                <p className="mt-6 rounded-[var(--radius-card)] bg-tint px-6 py-5 text-[15px] text-ink"><span className="font-semibold text-blue">Cosa ci serve da voi: </span>{c.ask}</p>
+              </Reveal>
             </div>
-            <div className="border-b border-line">
+            <div className="divide-y divide-line border-y border-line">
               {c.items.map((it, i) => {
                 const inner = (
-                  <div className="group grid items-baseline gap-2 border-t border-line py-7 transition-all duration-500 ease-expo hover:rounded-3xl hover:border-transparent hover:bg-tint hover:px-7 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)_auto] md:gap-8">
-                    <h3 className={`text-[clamp(1.4rem,2.2vw,2rem)] font-semibold tracking-tight ${it.href ? "text-blue" : ""}`}>{it.title}</h3>
+                  <div className="group grid gap-2 py-8 transition-colors duration-300 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)_auto] md:items-baseline md:gap-8">
+                    <h3 className="text-[clamp(1.4rem,2.2vw,1.875rem)] font-semibold tracking-[-0.03em] transition-colors group-hover:text-blue">{it.title}</h3>
                     <p className="text-[17px] leading-relaxed text-mute">{it.text}</p>
-                    {it.href && <span aria-hidden="true" className="text-xl text-blue transition-transform duration-300 group-hover:translate-x-1.5">→</span>}
+                    {it.href && <span aria-hidden="true" className="text-xl text-blue transition-transform duration-300 group-hover:translate-x-1">→</span>}
                   </div>
                 );
-                return (
-                  <Reveal key={it.title} delay={i * 0.04} y={20}>
-                    {it.href ? <Link href={it.href}>{inner}</Link> : inner}
-                  </Reveal>
-                );
+                return <Reveal key={it.title} delay={i * 0.04} y={16}>{it.href ? <Link href={it.href}>{inner}</Link> : inner}</Reveal>;
               })}
             </div>
           </div>

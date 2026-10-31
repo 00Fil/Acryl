@@ -11,7 +11,7 @@ export function ProcessToggle() {
   const [on, setOn] = useState(true);
   const list = on ? after : before;
   return (
-    <div className="rounded-[2.5rem] border border-line bg-tint p-6 md:p-12">
+    <div className="rounded-[var(--radius-panel)] border border-line bg-tint p-6 md:p-12">
       <div className="flex flex-wrap items-center justify-between gap-6">
         <p className="max-w-md text-lg text-mute">Esempio: una richiesta d'ordine che arriva via email.</p>
         <div role="tablist" aria-label="Confronto" className="relative flex rounded-full bg-white p-1.5">
