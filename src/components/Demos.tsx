@@ -6,7 +6,7 @@ import { cn } from "@/lib/cn";
 
 export function Window({ title, children, className }: { title: string; children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("overflow-hidden rounded-[var(--radius-card)] border border-line bg-tint shadow-[0_40px_90px_-40px_rgba(42,82,255,.4)] md:rounded-[var(--radius-panel)]", className)}>
+    <div className={cn("overflow-hidden rounded-[var(--radius-card)] border border-line bg-tint shadow-[0_24px_60px_-36px_rgba(11,16,32,.25)] md:rounded-[var(--radius-panel)]", className)}>
       <div className="flex items-center gap-2 border-b border-line bg-white/80 px-6 py-4 text-sm text-mute">
         <i className="h-2.5 w-2.5 rounded-full bg-blue/80" />
         <i className="h-2.5 w-2.5 rounded-full bg-blue/45" />
@@ -114,7 +114,7 @@ export function DocDemo() {
             {[92, 78, 86, 60, 90, 70, 82].map((w, i) => (
               <div key={i} className="mt-4 h-3 rounded-full bg-tint-2" style={{ width: `${w}%` }} />
             ))}
-            <motion.div className="absolute inset-x-0 h-[3px] bg-blue shadow-[0_0_30px_8px_rgba(42,82,255,.35)]" animate={{ top: ["0%", "100%"] }} transition={{ duration: 3.2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }} />
+            <motion.div className="absolute inset-x-0 h-[3px] bg-blue" animate={{ top: ["0%", "100%"] }} transition={{ duration: 3.2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }} />
           </div>
         </div>
         <div className="flex flex-col gap-3 bg-tint-2/60 p-6 md:p-8">

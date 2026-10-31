@@ -31,7 +31,7 @@ export default function AiPage() {
         <div className="mt-14 grid gap-4 md:grid-cols-2">
           {aiSolutions.map((s, i) => (
             <Reveal key={s.slug} delay={(i % 2) * 0.1}>
-              <Link href={`/ai/${s.slug}`} className="group flex h-full min-h-[320px] flex-col justify-between rounded-[var(--radius-panel)] border border-line bg-white p-9 transition-all duration-500 hover:-translate-y-1 hover:border-blue/40 hover:shadow-[0_30px_80px_-40px_rgba(42,82,255,.45)] md:p-11">
+              <Link href={`/ai/${s.slug}`} className="group flex h-full min-h-[320px] flex-col justify-between rounded-[var(--radius-panel)] border border-line bg-white p-9 transition-all duration-500 hover:-translate-y-1 hover:border-blue/40 hover:shadow-[0_24px_60px_-36px_rgba(11,16,32,.25)] md:p-11">
                 <h3 className="text-[clamp(1.9rem,3vw,2.75rem)] font-semibold leading-none tracking-[-0.04em]">{s.title}</h3>
                 <div className="flex items-end justify-between gap-6">
                   <p className="max-w-xs text-[17px] leading-relaxed text-mute">{s.short}</p>

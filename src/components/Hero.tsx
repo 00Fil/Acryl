@@ -8,7 +8,7 @@ export function Hero({ title, accent, lead }: { title: string; accent: string; l
   return (
     <section className="relative isolate flex min-h-[92svh] flex-col justify-end overflow-hidden bg-ink text-white">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-80">
-        <FloatingLines enabledWaves={["top", "middle", "bottom"]} lineCount={[6, 7, 6]} lineDistance={[7, 6, 8]} linesGradient={["#2a52ff", "#8fa6ff", "#2a52ff"]} animationSpeed={0.6} interactive={false} parallax={false} backgroundColor="#0b1020" />
+        <FloatingLines enabledWaves={["top", "middle", "bottom"]} lineCount={[6, 7, 6]} lineDistance={[7, 6, 8]} linesGradient={["#2a52ff", "#8fa6ff", "#2a52ff"]} animationSpeed={0.5} glow={0.3} interactive={false} parallax={false} backgroundColor="#0b1020" />
       </div>
       <div className="wrap pb-16 pt-40 md:pb-24">
         <Reveal>

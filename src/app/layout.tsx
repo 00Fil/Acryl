@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { Welcome } from "@/components/Welcome";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Vai al contenuto
         </a>
         <SmoothScroll />
+        <Welcome />
         <Header />
         <main id="main">{children}</main>
         <Footer />

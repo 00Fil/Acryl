@@ -82,7 +82,7 @@ export function Header() {
       <AnimatePresence>
         {open && (
           <motion.div id="mega" initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }} className="absolute inset-x-0 top-full hidden md:block" onMouseEnter={hold}>
-            <div className="mx-4 overflow-hidden rounded-b-[2.5rem] border border-t-0 border-line bg-white shadow-[0_30px_80px_-30px_rgba(42,82,255,.35)]">
+            <div className="mx-4 overflow-hidden rounded-b-[2.5rem] border border-t-0 border-line bg-white shadow-[0_24px_60px_-36px_rgba(11,16,32,.25)]">
               <div className="wrap grid grid-cols-12 gap-10 py-9">
                 <div className="col-span-3">
                   <p className="px-5 pb-3 text-[13px] font-semibold text-mute">Soluzioni e azienda</p>
