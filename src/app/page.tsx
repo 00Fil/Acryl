@@ -3,43 +3,38 @@ import { Cta } from "@/components/Cta";
 import { Faq } from "@/components/Faq";
 import { Marquee } from "@/components/Marquee";
 import { AiTabs } from "@/components/AiTabs";
+import { Offers } from "@/components/Offers";
 import { Principles } from "@/components/Principles";
-import { ProcessStack } from "@/components/ProcessStack";
 import { SectorTabs } from "@/components/SectorTabs";
 import { SectionHead } from "@/components/SectionHead";
 import { Section } from "@/components/Section";
-import { SolutionsGrid } from "@/components/SolutionsGrid";
-import { Statement } from "@/components/Statement";
+import { Steps } from "@/components/Steps";
 import { faqs, sectors } from "@/content/site";
 
 export default function Home() {
   return (
     <>
-      <Hero title="Soluzioni digitali per ogni settore." lead="Siti, software e automazioni, con l'intelligenza artificiale dove ottimizza davvero il lavoro." />
+      <Hero title="Costruiamo siti, software e automazioni con l'AI." lead="Per aziende che vogliono più richieste dal web, meno lavoro ripetitivo e strumenti che lavorano insieme." />
       <Marquee items={sectors.map((s) => s.name)} />
 
       <Section>
-        <Statement text="Le aziende non hanno bisogno di più strumenti. Hanno bisogno che quelli che hanno lavorino insieme, e che le attività ripetitive non occupino più il tempo delle persone." accent={["lavorino", "ripetitive"]} />
+        <SectionHead index="01" eyebrow="Cosa vendiamo" title="Tre cose, spiegate in chiaro." lead="Scegliete quella che risolve un problema vostro. Se ne servono più di una, le teniamo insieme." split />
+        <div className="mt-14"><Offers /></div>
       </Section>
 
       <Section>
-        <SectionHead index="01" eyebrow="Cosa facciamo" title="Tutte le soluzioni, in un posto." lead="Dal sito al software, dal marketing al supporto. Un unico interlocutore per tutto il percorso." split />
-        <div className="mt-14"><SolutionsGrid /></div>
-      </Section>
-
-      <Section>
-        <SectionHead index="02" eyebrow="AI nei processi" title="Cosa può fare l'AI nella tua azienda." lead="Quattro modi concreti per usarla. Ognuno parte da un processo che conoscete già." split />
+        <SectionHead index="02" eyebrow="AI nei processi" title="Dove l'AI fa risparmiare tempo." lead="Quattro usi concreti. Ognuno parte da un lavoro che fate già, e una persona controlla il risultato." split />
         <div className="mt-14"><AiTabs /></div>
       </Section>
 
       <Section>
-        <SectionHead index="03" eyebrow="Settori" title="Per ogni settore, il processo giusto." lead="Non partiamo dal settore ma dal processo. Ecco cosa cambia in pratica, in alcuni di essi." split />
+        <SectionHead index="03" eyebrow="Settori" title="Per settore, il lavoro che cambia." lead="Partiamo dal processo, non dal settore. Ecco alcuni esempi concreti." split />
         <div className="mt-14"><SectorTabs /></div>
       </Section>
 
       <Section>
-        <SectionHead index="04" eyebrow="Metodo" title="Quattro passi, ognuno con un risultato." lead="Scorri: ogni passaggio produce qualcosa che potete leggere o provare." />
-        <ProcessStack />
+        <SectionHead index="04" eyebrow="Come lavoriamo" title="Quattro passi, con un risultato per ciascuno." lead="Sapete sempre a che punto siete e cosa avete in mano." />
+        <Steps />
       </Section>
 
       <Section>

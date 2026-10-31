@@ -1,5 +1,4 @@
 "use client";
-import BlurText from "@/components/rb/BlurText";
 import Threads from "@/components/rb/Threads";
 import { Button } from "./Button";
 import { Reveal } from "./Reveal";
@@ -19,19 +18,20 @@ export function Hero({ title, lead }: { title: string; lead: string }) {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-blue" />
             </span>
-            AI integrata nei processi
+            Siti · Software · Automazioni AI
           </span>
         </Reveal>
-        <h1 className="sr-only">{title}</h1>
-        <BlurText text={title} animateBy="words" direction="bottom" delay={90} className="display mt-8 max-w-[18ch]" />
-        <Reveal delay={0.35}>
+        <Reveal delay={0.05}>
+          <h1 className="display mt-8 max-w-[18ch]">{title}</h1>
+        </Reveal>
+        <Reveal delay={0.12}>
           <p className="mt-9 max-w-xl text-xl leading-relaxed text-mute">{lead}</p>
           <div className="mt-11 flex flex-wrap gap-3">
-            <Button href="/ai">Scopri le soluzioni AI</Button>
-            <Button href="/preventivo" variant="outline" arrow={false}>Calcola il preventivo</Button>
+            <Button href="/soluzioni">Vedi cosa facciamo</Button>
+            <Button href="/preventivo" variant="outline" arrow={false}>Calcola un preventivo</Button>
           </div>
         </Reveal>
-        <Reveal delay={0.5} className="mt-20 grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line sm:grid-cols-3">
+        <Reveal delay={0.2} className="mt-20 grid gap-px overflow-hidden rounded-[var(--radius-card)] border border-line bg-line sm:grid-cols-3">
           {[
             { label: "Consegna media", value: "[N]", unit: "settimane" },
             { label: "Codice e dati", value: "100%", unit: "vostri", check: true },
