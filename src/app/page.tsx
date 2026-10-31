@@ -14,7 +14,7 @@ import { faqs, sectors } from "@/content/site";
 export default function Home() {
   return (
     <>
-      <Hero title="Più clienti dal web." accent="Meno lavoro ripetuto." lead="Costruiamo siti, software e automazioni con l'AI per aziende che vogliono crescere senza aggiungere ore." />
+      <Hero />
       <Marquee items={sectors.map((s) => s.name)} />
 
       <section id="offerte" className="bg-tint">
