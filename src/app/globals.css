@@ -1,0 +1,95 @@
+@import "tailwindcss";
+@import "@fontsource-variable/instrument-sans";
+
+@theme {
+  --font-sans: "Instrument Sans Variable", system-ui, sans-serif;
+  --color-ink: #0b1020;
+  --color-blue: #2a52ff;
+  --color-blue-deep: #1b3ad1;
+  --color-sky: #8fa6ff;
+  --color-tint: #eef2ff;
+  --color-tint-2: #dfe7ff;
+  --color-line: #d6def7;
+  --color-mute: #55607a;
+  --ease-expo: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: #fff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection {
+  background: var(--color-blue);
+  color: #fff;
+}
+:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+@utility h-display {
+  font-size: clamp(2.75rem, 7.2vw, 6.5rem);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  font-weight: 600;
+}
+@utility h-section {
+  font-size: clamp(2rem, 4.2vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: -0.038em;
+  font-weight: 600;
+}
+@utility wrap {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1440px;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 768px) {
+  .wrap {
+    padding-inline: 4rem;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgb(42 82 255 / 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 12px rgb(42 82 255 / 0);
+  }
+}
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
