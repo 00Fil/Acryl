@@ -1,6 +1,7 @@
 "use client";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import DotGrid from "./rb/DotGrid";
 
 /** Il carattere di Acryl: piani trasparenti che si sovrappongono e creano nuovi toni. Nessun gradiente. */
 const shapes = [
@@ -10,7 +11,14 @@ const shapes = [
   { cls: "left-[46%] top-[60%] h-[16%] w-[9%] rounded-[2rem]", depth: -16, op: 0.12 },
 ];
 
+function useReducedMotion() {
+  const [r, setR] = useState(false);
+  useEffect(() => setR(window.matchMedia("(prefers-reduced-motion: reduce)").matches), []);
+  return r;
+}
+
 export function Layers({ className = "" }: { className?: string }) {
+  const reduced = useReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const sx = useSpring(x, { stiffness: 60, damping: 18 });
@@ -25,6 +33,9 @@ export function Layers({ className = "" }: { className?: string }) {
   }, [x, y]);
   return (
     <div aria-hidden="true" className={`pointer-events-none absolute inset-0 hidden overflow-hidden md:block ${className}`}>
+      <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,#000_55%,transparent)]">
+        <DotGrid dotSize={4} gap={30} baseColor="#C5D1FF" activeColor="#2A52FF" proximity={140} strength={0.5} swell={1.2} fade={0} opacity={0.9} intro paused={reduced} clickShock />
+      </div>
       {shapes.map((s, i) => (
         <Shape key={i} {...s} sx={sx} sy={sy} />
       ))}

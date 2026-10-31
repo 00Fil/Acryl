@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { aiSolutions, categories } from "@/content/site";
 import { Reveal } from "./Reveal";
+import SpotlightCard from "./rb/SpotlightCard";
 
 export function Bento() {
   const others = categories.filter((c) => c.id !== "ai");
@@ -28,7 +29,7 @@ export function Bento() {
       </Reveal>
       {others.map((c, i) => (
         <Reveal key={c.id} delay={(i % 2) * 0.1}>
-          <Link href={`/soluzioni#${c.id}`} className="group relative block h-full overflow-hidden rounded-[2.5rem] border border-line bg-tint p-8 transition-colors duration-500 hover:bg-tint-2 md:p-10">
+          <SpotlightCard theme="light" spotlightColor="#2A52FF" className="h-full !rounded-[2.5rem] !border-line !bg-tint"><Link href={`/soluzioni#${c.id}`} className="group relative block h-full overflow-hidden p-8 md:p-10">
             <div className="flex items-start justify-between gap-6">
               <h3 className="text-[clamp(1.75rem,2.6vw,2.5rem)] font-semibold leading-none tracking-[-0.035em]">{c.title}</h3>
               <span aria-hidden="true" className="text-2xl text-blue transition-transform duration-500 ease-expo group-hover:translate-x-2">→</span>
@@ -39,7 +40,7 @@ export function Bento() {
                 <span key={it.title} className="rounded-full bg-white px-4 py-2 text-[15px] text-ink">{it.title}</span>
               ))}
             </div>
-          </Link>
+          </Link></SpotlightCard>
         </Reveal>
       ))}
     </div>

@@ -36,3 +36,13 @@ Aggiungi un oggetto a `aiSolutions` in `src/content/site.ts`: pagina, menu, foot
 - `/privacy`: bozza da far scrivere a un consulente.
 - Testi di esempio (settori, FAQ, demo): verificare con i servizi reali.
 - Prezzi: volutamente assenti; la stima mostra solo la complessità.
+
+## React Bits
+
+Il registro è configurato in `components.json`. Per aggiungere un componente:
+
+```bash
+npx shadcn@latest add @react-bits/<Nome>-TS-TW
+```
+
+I file finiscono in `src/components/rb`. In uso: `DotGrid` (sfondo delle testate, `Layers.tsx`), `Waves` (bande blu, `BandWaves.tsx`), `SpotlightCard` (riquadri della home, `Bento.tsx`). Sfondi WebGL disattivati su telefono e con "riduci animazioni".
