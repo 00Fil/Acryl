@@ -1,7 +1,16 @@
+function siteUrl() {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  try {
+    return raw ? new URL(raw).origin : "https://example.com";
+  } catch {
+    return "https://example.com";
+  }
+}
+
 export const site = {
   name: "Acryl",
   tagline: "Soluzioni digitali per ogni settore, con l'AI dove ottimizza davvero il lavoro.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
+  url: siteUrl(),
   email: "ciao@example.com",
   responseHours: "[N]",
 };
