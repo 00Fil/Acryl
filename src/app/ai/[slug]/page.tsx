@@ -33,7 +33,7 @@ export default async function AiDetail({ params }: { params: Promise<{ slug: str
     <>
       <PageHero title={s.title} lead={s.lead} eyebrow={undefined}>
         <div className="flex flex-wrap items-center gap-6">
-          <Button href="/preventivo">Calcola il preventivo</Button>
+          <Button href="/preventivo">Calcolare il preventivo</Button>
           <nav aria-label="Percorso" className="text-[15px] text-mute">
             <Link href="/soluzioni" className="hover:text-blue">Soluzioni</Link> / <Link href="/ai" className="hover:text-blue">AI</Link> / <span className="text-ink">{s.title}</span>
           </nav>

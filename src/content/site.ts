@@ -11,7 +11,7 @@ export const site = {
   name: "Acryl",
   tagline: "Soluzioni digitali per ogni settore, con l'AI dove ottimizza davvero il lavoro.",
   url: siteUrl(),
-  email: "ciao@example.com",
+  email: "info@example.com",
   responseHours: "[N]",
 };
 

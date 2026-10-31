@@ -14,13 +14,15 @@ import { faqs, sectors } from "@/content/site";
 export default function Home() {
   return (
     <>
-      <Hero title="Costruiamo siti, software e automazioni con l'AI." lead="Per aziende che vogliono più richieste dal web, meno lavoro ripetitivo e strumenti che lavorano insieme." />
+      <Hero title="Più clienti dal web." accent="Meno lavoro ripetuto." lead="Costruiamo siti, software e automazioni con l'AI per aziende che vogliono crescere senza aggiungere ore." />
       <Marquee items={sectors.map((s) => s.name)} />
 
-      <Section>
-        <SectionHead index="01" eyebrow="Cosa vendiamo" title="Tre cose, spiegate in chiaro." lead="Scegliete quella che risolve un problema vostro. Se ne servono più di una, le teniamo insieme." split />
-        <div className="mt-14"><Offers /></div>
-      </Section>
+      <section id="offerte" className="bg-tint">
+        <div className="wrap py-24 md:py-36">
+          <SectionHead index="01" eyebrow="Cosa vendiamo" title="Tre cose, spiegate in chiaro." lead="Scegliete quella che risolve un problema vostro. Se ne servono più di una, le teniamo insieme." split />
+          <div className="mt-14"><Offers /></div>
+        </div>
+      </section>
 
       <Section>
         <SectionHead index="02" eyebrow="AI nei processi" title="Dove l'AI fa risparmiare tempo." lead="Quattro usi concreti. Ognuno parte da un lavoro che fate già, e una persona controlla il risultato." split />
@@ -49,7 +51,7 @@ export default function Home() {
         </div>
       </Section>
 
-      <Cta title="Hai un progetto?" text="Raccontaci cosa vuoi ottenere: ti rispondiamo con una proposta scritta." />
+      <Cta title="Hai un progetto?" text="Raccontateci cosa volete ottenere: vi rispondiamo con una proposta scritta." />
     </>
   );
 }

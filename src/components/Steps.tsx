@@ -20,7 +20,7 @@ export function Steps() {
             <h3 className="mt-6 text-2xl font-semibold tracking-tight">{s.title}</h3>
             <p className="mt-3 text-[17px] leading-relaxed text-mute">{s.text}</p>
             <p className="mt-5 rounded-2xl bg-tint px-4 py-3 text-[15px] text-blue">
-              <span className="font-semibold">Ottieni:</span> {s.out}
+              <span className="font-semibold">Risultato:</span> {s.out}
             </p>
           </li>
         ))}

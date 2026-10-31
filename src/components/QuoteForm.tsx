@@ -55,7 +55,7 @@ export function QuoteForm() {
       </div>
     );
 
-  const labels = ["Cosa ti serve", "Il contesto", "I tuoi dati"];
+  const labels = ["Di cosa avete bisogno", "Il contesto", "I vostri dati"];
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)]">
       <form onSubmit={submit} className="rounded-[var(--radius-panel)] border border-line bg-tint p-6 md:p-12">
@@ -71,7 +71,7 @@ export function QuoteForm() {
           <motion.div key={step} initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -24 }} transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}>
             {step === 0 && (
               <fieldset>
-                <legend className="text-3xl font-semibold tracking-tight">Cosa ti serve?</legend>
+                <legend className="text-3xl font-semibold tracking-tight">Di cosa avete bisogno?</legend>
                 <p className="mt-2 text-mute">Puoi sceglierne più di una.</p>
                 <div className="mt-8 flex flex-wrap gap-2.5">
                   {options.map((o) => {
@@ -94,11 +94,11 @@ export function QuoteForm() {
             )}
             {step === 2 && (
               <div className="flex flex-col gap-5">
-                <h2 className="text-3xl font-semibold tracking-tight">Come ti contattiamo?</h2>
+                <h2 className="text-3xl font-semibold tracking-tight">Come possiamo contattarvi?</h2>
                 <Field label="Nome" value={f.name} onChange={(v) => setF({ ...f, name: v })} autoComplete="name" required />
                 <Field label="Email" type="email" value={f.email} onChange={(v) => setF({ ...f, email: v })} autoComplete="email" required />
                 <Field label="Azienda" value={f.company} onChange={(v) => setF({ ...f, company: v })} autoComplete="organization" />
-                <label className="block text-sm font-medium">Raccontaci il progetto
+                <label className="block text-sm font-medium">Raccontateci il progetto
                   <textarea value={f.message} onChange={(e) => setF({ ...f, message: e.target.value })} rows={4} className="mt-2 w-full rounded-2xl border border-line bg-white px-5 py-4 text-base outline-none transition-colors focus:border-blue" />
                 </label>
                 <input type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" value={f.website} onChange={(e) => setF({ ...f, website: e.target.value })} />
@@ -126,7 +126,7 @@ export function QuoteForm() {
         <p className="mt-2 text-4xl font-semibold tracking-tight">{level}</p>
         <p className="mt-1 text-sm opacity-85">Complessità indicativa</p>
         <ul className="mt-8 flex min-h-[80px] flex-col gap-2">
-          {needs.length === 0 && <li className="opacity-70">Scegli cosa ti serve per vedere il riepilogo.</li>}
+          {needs.length === 0 && <li className="opacity-70">Scegliete cosa vi serve per vedere il riepilogo.</li>}
           {needs.map((n) => (
             <motion.li key={n} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="flex items-center gap-3"><Check size={22} tone="white" />{n}</motion.li>
           ))}

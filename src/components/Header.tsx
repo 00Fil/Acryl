@@ -9,7 +9,7 @@ import { categories, nav, site } from "@/content/site";
 import { cn } from "@/lib/cn";
 
 const extra = [
-  { title: "Strumenti", items: [{ title: "Calcola preventivo", text: "Stima il progetto in pochi passaggi.", href: "/preventivo" }, { title: "Contatti", text: "Scrivici o prenota una chiamata.", href: "/preventivo" }] },
+  { title: "Strumenti", items: [{ title: "Calcolare il preventivo", text: "Stima il progetto in pochi passaggi.", href: "/preventivo" }, { title: "Contatti", text: "Scriveteci o prenotate una chiamata.", href: "/preventivo" }] },
   { title: "Azienda", items: [{ title: "Chi siamo", text: "Il team e il modo in cui lavoriamo.", href: "/chi-siamo" }, { title: "Come usiamo l'AI", text: "Cosa automatizziamo e cosa no.", href: "/ai" }] },
 ];
 
@@ -71,7 +71,7 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-3">
           <Link href="/preventivo" className="hidden rounded-full bg-blue px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-ink md:inline-block">
-            Calcola il preventivo
+            Calcolare il preventivo
           </Link>
           <button type="button" className="rounded-full border border-ink px-5 py-2.5 text-sm font-medium md:hidden" onClick={() => setMobile(true)} aria-label="Apri il menu">
             Menu
@@ -120,7 +120,7 @@ export function Header() {
                     <span aria-hidden="true" className="absolute top-1/2 -right-10 h-40 w-40 rounded-[var(--radius-panel)] bg-ink/25 mix-blend-multiply transition-transform duration-700 ease-expo group-hover:-translate-y-3" />
                     <span className="relative text-sm opacity-90">Strumento</span>
                     <span className="relative">
-                      <span className="block text-3xl font-semibold leading-[1.05] tracking-tight">Calcola il tuo preventivo</span>
+                      <span className="block text-3xl font-semibold leading-[1.05] tracking-tight">Calcolare il preventivo</span>
                       <span className="mt-3 block text-[15px] opacity-90">Pochi passaggi, stima per iscritto.</span>
                     </span>
                   </Link>
@@ -158,7 +158,7 @@ export function Header() {
                 </details>
               ))}
               <Link href="/chi-siamo" className="block border-b border-line py-5 text-2xl font-semibold tracking-tight">Chi siamo</Link>
-              <div className="mt-8"><Button href="/preventivo" className="w-full justify-center">Calcola il preventivo</Button></div>
+              <div className="mt-8"><Button href="/preventivo" className="w-full justify-center">Calcolare il preventivo</Button></div>
             </div>
           </motion.div>
         )}

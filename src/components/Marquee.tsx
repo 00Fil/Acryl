@@ -4,13 +4,13 @@ export function Marquee({ items }: { items: string[] }) {
       {items.map((t) => (
         <span key={t} className="flex items-center gap-10">
           {t}
-          <span className="h-2 w-2 rounded-full bg-blue" />
+          <span className="h-2 w-2 rounded-full bg-white/70" />
         </span>
       ))}
     </div>
   );
   return (
-    <div className="overflow-hidden border-y border-line bg-tint/60 py-7">
+    <div className="overflow-hidden bg-blue py-7 text-white">
       <div className="flex w-max whitespace-nowrap text-[clamp(1.5rem,3vw,2.5rem)] font-semibold tracking-tight [animation:marquee_32s_linear_infinite] hover:[animation-play-state:paused]">
         {row(false)}
         {row(true)}

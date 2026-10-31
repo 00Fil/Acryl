@@ -50,7 +50,7 @@ export default function ChiSiamo() {
           ))}
         </div>
       </Section>
-      <Cta title="Parliamo del tuo progetto." />
+      <Cta title="Parliamo del vostro progetto." />
     </>
   );
 }

@@ -22,7 +22,7 @@ export function Footer() {
             </FooterCol>
             <FooterCol title="Azienda" className="md:col-span-3">
               <Link href="/chi-siamo">Chi siamo</Link>
-              <Link href="/preventivo">Calcola preventivo</Link>
+              <Link href="/preventivo">Calcolare il preventivo</Link>
               <Link href="/preventivo">Contatti</Link>
             </FooterCol>
           </div>

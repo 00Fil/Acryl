@@ -49,7 +49,7 @@ export default function Soluzioni() {
           </div>
         </Section>
       ))}
-      <Cta title="Non sai da dove partire?" text="Descrivi la situazione: ti diciamo quale soluzione ha senso e quale no." />
+      <Cta title="Non sai da dove partire?" text="Descrivete la situazione: vi indichiamo quale soluzione ha senso e quale no." />
     </>
   );
 }

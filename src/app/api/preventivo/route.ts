@@ -58,7 +58,7 @@ export async function POST(req: Request) {
   });
   if (!res.ok) {
     console.error("[preventivo] invio fallito", res.status, await res.text());
-    return NextResponse.json({ ok: false, error: "Non siamo riusciti a inviare la richiesta. Scrivici a " + site.email }, { status: 502 });
+    return NextResponse.json({ ok: false, error: "Non siamo riusciti a inviare la richiesta. Scriveteci a " + site.email }, { status: 502 });
   }
   return NextResponse.json({ ok: true });
 }

@@ -25,7 +25,7 @@ export function AiTabs() {
               <p className="text-[clamp(1.75rem,3vw,2.75rem)] font-semibold leading-[1.05] tracking-tight">{s.short}</p>
               <p className="mt-5 text-lg leading-relaxed text-mute">{s.lead}</p>
               <Link href={`/ai/${s.slug}`} className="group mt-8 inline-flex items-center gap-2 rounded-full bg-blue px-7 py-4 font-semibold text-white transition-colors hover:bg-ink">
-                Scopri {s.title.toLowerCase()} <span aria-hidden="true" className="transition-transform group-hover:translate-x-1.5">→</span>
+                Approfondire {s.title.toLowerCase()} <span aria-hidden="true" className="transition-transform group-hover:translate-x-1.5">→</span>
               </Link>
             </div>
             <DemoFor kind={s.demo} />

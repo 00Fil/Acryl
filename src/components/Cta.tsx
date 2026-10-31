@@ -3,7 +3,7 @@ import FloatingLines from "@/components/rb/FloatingLines";
 import { Button } from "./Button";
 import { Reveal } from "./Reveal";
 
-export function Cta({ title = "Hai un processo da migliorare?", text = "Raccontaci cosa vuoi ottenere: ti rispondiamo con una proposta scritta." }: { title?: string; text?: string }) {
+export function Cta({ title = "Hai un processo da migliorare?", text = "Raccontateci cosa volete ottenere: vi rispondiamo con una proposta scritta." }: { title?: string; text?: string }) {
   return (
     <section className="wrap py-24 md:py-36">
       <div className="relative isolate overflow-hidden rounded-[var(--radius-panel)] bg-ink text-white">
@@ -16,7 +16,7 @@ export function Cta({ title = "Hai un processo da migliorare?", text = "Racconta
             <p className="mt-6 max-w-lg text-lg text-white/75">{text}</p>
           </Reveal>
           <Reveal delay={0.12}>
-            <Button href="/preventivo" variant="light">Calcola il preventivo</Button>
+            <Button href="/preventivo" variant="light">Calcolare il preventivo</Button>
           </Reveal>
         </div>
       </div>

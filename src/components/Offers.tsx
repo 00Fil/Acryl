@@ -8,21 +8,21 @@ const offers = [
     who: "Per chi vuole farsi trovare su Google e ricevere contatti dal web.",
     gets: ["Sito veloce, leggibile da telefono", "Moduli che arrivano direttamente a voi", "Aggiornamenti e assistenza dopo il lancio"],
     href: "/soluzioni",
-    cta: "Vedi i siti",
+    cta: "Vedere i siti",
   },
   {
     title: "Software su misura",
     who: "Per chi gestisce ordini, clienti o pratiche ancora su fogli e messaggi.",
     gets: ["Un programma pensato per il vostro lavoro", "Accessi e ruoli per ogni persona del team", "I dati restano di proprietà vostra"],
     href: "/soluzioni",
-    cta: "Vedi il software",
+    cta: "Vedere il software",
   },
   {
     title: "Automazioni con l'AI",
     who: "Per chi perde ore a copiare dati e rispondere alle stesse domande.",
     gets: ["Risposte automatiche su catalogo e documenti", "Dati passati da un programma all'altro", "Una persona approva ogni passaggio delicato"],
     href: "/ai",
-    cta: "Vedi le soluzioni AI",
+    cta: "Vedere le soluzioni AI",
   },
 ];
 
